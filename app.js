@@ -26,6 +26,16 @@ app.post("/auth/register", async (req, res) => {
     if(!name) {
         return res.status(422).json({mensagem: "O nome é obrigatório!"})
     }
+    if(!email) {
+        return res.status(422).json({mensagem: "O email é obrigatório!"})
+    }
+    if(!password) {
+        return res.status(422).json({mensagem: "A senha é obrigatória!"})
+    }
+
+    if(password !== confirmPassword) {
+        return res.status(422).json({mensagem: "As senhas não conferem"})
+    }
 
 })
 
@@ -39,4 +49,4 @@ mongoose
     app.listen(3000);
     console.log("banco conectado!");
   })
-  .catch((err) => console.log(err));
+  .catch((err) => console.log(err)); 
