@@ -44,6 +44,18 @@ app.post("/auth/register", async (req, res) => {
     }
 
 
+    //criando senhas 
+    const salt = await bcrypt.genSalt(12)
+    const passwordHash = await bcrypt.hash(password, salt)
+
+    //criando usuarios
+    const user = new User({
+        name,
+        email,
+        password
+    })
+
+    
 })
 
 
