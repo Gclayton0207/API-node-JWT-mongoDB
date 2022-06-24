@@ -52,10 +52,19 @@ app.post("/auth/register", async (req, res) => {
     const user = new User({
         name,
         email,
-        password
+        password: passwordHash,
     })
 
-    
+    try{
+
+        await user.save()
+
+        res.status(201).json({mensagem: "usuario criado com sucesso"})
+
+    } catch(error){
+        console.log(error)
+        res.status(500).json({mensagem: "Aconteceu algum erro no servidor"})
+    }
 })
 
 
