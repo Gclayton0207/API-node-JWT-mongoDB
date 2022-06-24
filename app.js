@@ -37,7 +37,15 @@ app.post("/auth/register", async (req, res) => {
         return res.status(422).json({mensagem: "As senhas não conferem"})
     }
 
+    //verificação de usuarios
+    const userExists = await User.findOne({email: email})
+    if(userExists) {
+        return res.status(422).json({mensagem: "Por favor utilize outro email"})
+    }
+
+
 })
+
 
 //credenciais de acesso ao banco de dados
 const dbUser = process.env.DB_USER 
